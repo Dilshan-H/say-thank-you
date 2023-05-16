@@ -1,5 +1,5 @@
 function containsKeywords(str, keywords) {
-  console.log("Checking: " + str);
+  // check if the string contains any of the keywords
   for (let i = 0; i < keywords.length; i++) {
     if (str.toLowerCase().includes(keywords[i].trim().toLowerCase())) {
       return true;
@@ -15,12 +15,16 @@ document.getElementById("clear-button").addEventListener("click", (event) => {
   const chatText = document.getElementById("chat-text");
   const generatedMessage = document.getElementById("generated-message-content");
   const tagline = document.getElementById("tagline");
+  const stat = document.getElementById("stat");
+  const replyText = document.getElementById("reply-text");
 
   // Set the values of the elements to an empty string
   generatedMessage.textContent = "";
   keywords.value = "";
   chatText.value = "";
   tagline.value = "";
+  replyText.value = "";
+  stat.textContent = "Matching Strings Count: 0 / 0";
 });
 
 document
@@ -57,7 +61,7 @@ document
       return;
     }
 
-    // Match the pattern
+    // Match the chat text pattern
     const pattern =
       /\[(\d{1,2}\/\d{1,2}),\s{1,2}(\d{1,2}:\d{2}\s(?:AM|PM))\]\s(.*?):\s(.*?)\s?(\@.*)/gm;
     const messages = Array.from(chatText.matchAll(pattern));
@@ -68,13 +72,10 @@ document
       const content = message[4];
       const tagline = message[5];
 
-      console.log("Sender: " + sender);
-
       if (
         tagline.includes(inputTagline) &&
         containsKeywords(content, keywords)
       ) {
-        console.log("Matched: " + sender);
         filteredMessages.add(sender);
       }
     }
@@ -88,5 +89,8 @@ document
 
     document.getElementById("generated-message-content").textContent =
       replyText.slice(0, -1);
+    const stat = document.getElementById("stat");
+    stat.textContent = `Matching Strings Count: ${filteredMessagesArray.length} / ${messages.length}`;
+    stat.scrollIntoView({ behavior: "smooth" });
     document.getElementById("generated-message").classList.remove("hidden");
   });
