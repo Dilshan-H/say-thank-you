@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/index.css" />
+  </head>
+  <body>
+    <div id="columns">
+      <h1 class="title">Message Generator</h1>
+      <form id="message-form" class="mb-6">
+        <div class="field">
+          <label class="label">Paste your chat message:</label>
+          <div class="control">
+            <textarea
+              id="chat-text"
+              class="textarea"
+              placeholder="[2/21, 07:12 AM] John: Happy anniversary! @Mary
+[2/21, 07:15 AM] Jane: Cheers guys - Happy Anniversary! @Mary"
+              rows="10"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Keywords (comma separated):</label>
+          <div class="control">
+            <input
+              id="keywords"
+              class="input"
+              type="text"
+              placeholder="cheers, happy, anniversary"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Tagline:</label>
+          <div class="control">
+            <input id="tagline" class="input" type="text" placeholder="Mary" />
+          </div>
+          <p class="help">Without @ sign</p>
+        </div>
+
+        <div class="field">
+          <label class="label">Reply Message:</label>
+          <div class="control">
+            <input
+              id="reply-text"
+              class="input"
+              type="text"
+              placeholder="*Thank you so much for your wishes!* 😊♥️"
+            />
+          </div>
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link">Generate</button>
+          </div>
+          <div class="control">
+            <button class="button is-link is-light" id="clear-button">
+              Clear
+            </button>
+          </div>
+        </div>
+      </form>
+      <div id="generated-message" class="hidden">
+        <span class="tag is-info is-large" id="stat"></span>
+        <h2 class="subtitle">Generated Message:</h2>
+        <p id="generated-message-content"></p>
+      </div>
+    </div>
+
+    <script src="/src/js/app.js"></script>
+  </body>
+</html>
